@@ -72,6 +72,8 @@ volumes:
 3. Start docker-compose services
 Use the `docker-compose up -d` command to run the containers (root permissions required).
 To interact with the containers, run the `docker exec -it <container-id> bash` command. Container IDs can be obtained by running `docker ps`.  
+![compose-up-ps](https://user-images.githubusercontent.com/23087960/48538567-ce56fd00-e882-11e8-8408-b32d00a00773.jpg)
+
 
 4. Configure SonarQube and Jenkins
 
@@ -83,25 +85,47 @@ Setting up Jenkins:
 Configuring Jenkins:
 - From the Jenkins Dashboard, go to `Manage Jenkins > Configure System`. Make a note of the Jenkins Home Directory mentioned at the top of the page.
 - Add a new environment variable under `Global Properties` named `SONAR_USER_HOME`, with its value as the Jenkins home directory path.
+ ![global-properties](https://user-images.githubusercontent.com/23087960/48538654-02322280-e883-11e8-9221-742144f6ff1e.jpg)
  
-- Make sure to enable injection of SonarQube server configuration as build environment variables. Add the SonarQube server location in the Server URL field.   
+- Make sure to enable injection of SonarQube server configuration as build environment variables. Add the SonarQube server location in the Server URL field.
+![sonar-config](https://user-images.githubusercontent.com/23087960/48538708-268dff00-e883-11e8-848b-f5d1fa56ee9a.jpg)
+
 - Select the `Add SonarQube Installation` option, and then add required details (server version 5.3+ will ask for an authentication token, which can be created after accessing the SonarQube server web interface)
+ ![sonar-token](https://user-images.githubusercontent.com/23087960/48538756-52a98000-e883-11e8-88d3-67d00fc2b846.jpg)
+ 
+ Some of these values will be needed later when configuring the project
+ ![sonar-token-2](https://user-images.githubusercontent.com/23087960/48538767-5937f780-e883-11e8-8e9c-130de277610f.jpg)
+
  
 - Under the `Jenkins Location` sub-section, add the Jenkins host’s location in the `Jenkins URL` field.
+![sonar-global-tools](https://user-images.githubusercontent.com/23087960/48538933-c3509c80-e883-11e8-8849-2f94ef96b292.jpg)
+
 SonarQube Scanner Configuration:
 - `Manage Jenkins > Global Tools Configuration`
 - Select `Add SonarQube Scanner` and select the version to be installed.  
 
 Create and Configure Jenkins Project:
 - From the Dashboard, select `New Item`, choose `Freestyle Project` and name it.
-- Under `Source Code Management`, select Git and add the target repository that is to be scanned.  
-- Prepare the build environment.  
+- Under `Source Code Management`, select Git and add the target repository that is to be scanned.
+![scm](https://user-images.githubusercontent.com/23087960/48539016-f72bc200-e883-11e8-8a52-70946f396a89.jpg)
+
+- Prepare the build environment.
+![build-env](https://user-images.githubusercontent.com/23087960/48539048-0b6fbf00-e884-11e8-8109-f90b4dfb3f17.jpg)
+
 - Under the `Build` section, add a build step to `Execute SonarQube Scanner`. The parameters added under `Analysis Properties` will be passed to the `sonar.properties` file.  
+![build](https://user-images.githubusercontent.com/23087960/48539068-1c203500-e884-11e8-9b20-6cf43708e261.jpg)
 
 
 5. Run a build
-Once config is complete, go to the project and select `Build Now`. Build progress can be monitored using `Console Output`.  
+Once config is complete, go to the project and select `Build Now`. Build progress can be monitored using `Console Output`.
+![console](https://user-images.githubusercontent.com/23087960/48539082-2a6e5100-e884-11e8-8d37-d1f0e04a1ff1.jpg)
+
 
 
 6. View Results
 The scan results can be viewed by either clicking on the SonarQube link under the Jenkins project, or by manually accessing the project on SonarQube web.
+![results1](https://user-images.githubusercontent.com/23087960/48539114-3e19b780-e884-11e8-9882-425d1ed6890a.jpg)
+![results2](https://user-images.githubusercontent.com/23087960/48539119-43770200-e884-11e8-8d3d-e84b32eb0ce8.jpg)
+![results3](https://user-images.githubusercontent.com/23087960/48539127-496ce300-e884-11e8-8738-b39b9d68dfba.jpg)
+
+
