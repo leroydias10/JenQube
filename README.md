@@ -117,15 +117,22 @@ Create and Configure Jenkins Project:
 
 
 5. Run a build
+
 Once config is complete, go to the project and select `Build Now`. Build progress can be monitored using `Console Output`.
 ![console](https://user-images.githubusercontent.com/23087960/48539082-2a6e5100-e884-11e8-8d37-d1f0e04a1ff1.jpg)
 
 
 
 6. View Results
+
 The scan results can be viewed by either clicking on the SonarQube link under the Jenkins project, or by manually accessing the project on SonarQube web.
 ![results1](https://user-images.githubusercontent.com/23087960/48539114-3e19b780-e884-11e8-9882-425d1ed6890a.jpg)
 ![results2](https://user-images.githubusercontent.com/23087960/48539119-43770200-e884-11e8-8d3d-e84b32eb0ce8.jpg)
 ![results3](https://user-images.githubusercontent.com/23087960/48539127-496ce300-e884-11e8-8738-b39b9d68dfba.jpg)
 
 
+**Troubleshooting:**
+
+- Java Heap Space errors like `Insufficient memory for the Java Runtime Environment to continue` and `GC overhead limit exceeded`indicate that the container needs more resources, or better utilization of resources. Increasing the host VM's memory, and [tweaking the JVM options](https://stackoverflow.com/questions/10104443/sonar-findbugs-heap-size) could help solve this.
+
+- Errors caused by incompatiblity between versions of SonarQube and Java can be fixed by upgrading to a Java version supported by SonarQube.
