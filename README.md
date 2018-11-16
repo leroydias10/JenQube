@@ -10,6 +10,7 @@ Implementing Jenkins and SonarQube using Docker Compose to scan a GitHub repo
 
 
 **Environment/Service Versions Used**:
+
 Host System – Ubuntu 16.04 LTS in VMware Workstation – 4 GB RAM, 25 GB storage 
 
 Target Github Repository: [DVWA](https://github.com/ethicalhack3r/DVWA)
